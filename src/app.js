@@ -1,6 +1,8 @@
+import Lobby from 'views/lobby'
+
 function App () {
   return (
-    <div>Hello world</div>
+    <Lobby />
   )
 }
 
