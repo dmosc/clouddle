@@ -1,7 +1,19 @@
 import React from 'react'
+import { LobbyContainer, MenuButton, MenuContainer } from './elements'
+import { Typography } from '@mui/material'
 
 function Lobby () {
-  return <div>Lobby</div>
+  return (
+    <LobbyContainer>
+      <MenuContainer>
+        <Typography variant='h1' gutterBottom>
+          Clouddle
+        </Typography>
+        <MenuButton variant='contained' size='large'>Create room</MenuButton>
+        <MenuButton variant='contained' size='large'>Join room</MenuButton>
+      </MenuContainer>
+    </LobbyContainer>
+  )
 }
 
 export default Lobby
