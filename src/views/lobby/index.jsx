@@ -6,7 +6,7 @@ function Lobby () {
   return (
     <LobbyContainer>
       <MenuContainer>
-        <Typography variant='h1' gutterBottom>
+        <Typography variant='h1' gutterBottom style={{ fontWeight: 'bolder' }}>
           Clouddle
         </Typography>
         <MenuButton variant='contained' size='large'>Create room</MenuButton>
