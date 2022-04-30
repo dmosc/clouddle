@@ -1,16 +1,13 @@
 import React from 'react'
-import { LobbyContainer, MenuButton, MenuContainer } from './elements'
-import { Typography } from '@mui/material'
+import { LobbyContainer, MenuButton, MenuContainer, Title } from './elements'
 
 function Lobby () {
   return (
     <LobbyContainer>
       <MenuContainer>
-        <Typography variant='h1' gutterBottom style={{ fontWeight: 'bolder' }}>
-          Clouddle
-        </Typography>
-        <MenuButton variant='contained' size='large'>Create room</MenuButton>
-        <MenuButton variant='contained' size='large'>Join room</MenuButton>
+        <Title>Clouddle</Title>
+        <MenuButton variant='contained' color='secondary' size='large'>Create room</MenuButton>
+        <MenuButton variant='contained' color='secondary' size='large'>Join room</MenuButton>
       </MenuContainer>
     </LobbyContainer>
   )
