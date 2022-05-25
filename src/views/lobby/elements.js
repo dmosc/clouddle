@@ -1,17 +1,5 @@
 import styled from '@emotion/styled'
-
-const LobbyContainer = styled.div`
-  width: 50%;
-  height: 70%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
-  background: blueviolet;
-  border-radius: 2%;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  padding: 10px;
-`
+import { Button } from '@mui/material'
 
 const Title = styled.h2`
   --color-primary: #fce205;
@@ -24,7 +12,7 @@ const Title = styled.h2`
   font-family: "Comic Sans MS", sans-serif;
   font-weight: bolder;
   text-transform: uppercase;
-  font-size: 11vw;
+  font-size: 8vw;
   text-align: center;
   margin-top: 10px;
   color: var(--color-primary);
@@ -90,4 +78,47 @@ const Title = styled.h2`
   }
 `
 
-export { LobbyContainer, Title }
+const MenuButton = styled(Button)`
+  width: 100%;
+  font-size: xx-large;
+  font-weight: bolder;
+`
+
+const MenuButtonContainer = styled.div`
+  width: 85%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`
+
+const RoomTextField = styled.input`
+  font-weight: bolder;
+  font-size: x-large;
+  color: white;
+  height: 3vw;
+  width: 100%;
+  background-color: rebeccapurple;
+  border: none;
+  margin: 20px;
+  text-align: center;
+  border-radius: 5px;
+
+  ::placeholder {
+    color: inherit;
+    opacity: 0.5;
+  }
+
+  :focus {
+    outline: none;
+  }
+`
+
+const Divider = styled.div`
+  width: 30%;
+  background-color: rebeccapurple;
+  height: 5px;
+  margin: 10px 0;
+`
+
+export { Title, MenuButton, MenuButtonContainer, RoomTextField, Divider }

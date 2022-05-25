@@ -1,18 +1,39 @@
-import React from 'react'
-import { Route, Routes } from 'react-router-dom'
-import { LobbyContainer, Title } from './elements'
-import Menu from './menu'
-import NewRoom from './new-room'
+import React, { useState } from 'react'
+import { Title, Divider, MenuButton, MenuButtonContainer, RoomTextField } from './elements'
+import { useNavigate } from 'react-router-dom'
+import { CardContainer } from '../elements'
 
 function Lobby () {
+  const [room, setRoom] = useState(undefined)
+  const navigate = useNavigate()
+
   return (
-    <LobbyContainer>
+    <CardContainer>
       <Title>Clouddle</Title>
-      <Routes>
-        <Route path='/' element={<Menu />} />
-        <Route path='/new' element={<NewRoom />} />
-      </Routes>
-    </LobbyContainer>
+      <MenuButtonContainer>
+        <RoomTextField
+          placeholder='room-id'
+          onChange={({ target }) => {
+            setRoom(target.value)
+          }}
+        />
+        <MenuButton
+          variant='contained'
+          color='secondary'
+          onClick={() => navigate(`/room/${room}`)}
+        >
+          Join room
+        </MenuButton>
+        <Divider />
+        <MenuButton
+          variant='contained'
+          color='secondary'
+          onClick={() => navigate('/room/new')}
+        >
+          Create room
+        </MenuButton>
+      </MenuButtonContainer>
+    </CardContainer>
   )
 }
 

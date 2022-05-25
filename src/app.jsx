@@ -22,7 +22,7 @@ function App () {
       <React.Suspense fallback={<TopBarProgress />}>
         <Routes>
           <Route path='*' element={<Lobby />} />
-          <Route path='/join:id' element={<Room />} />
+          <Route path='room/:id' element={<Room />} />
         </Routes>
       </React.Suspense>
     </AppContainer>
