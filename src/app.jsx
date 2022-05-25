@@ -1,6 +1,7 @@
 import React from 'react'
 import { Route, Routes } from 'react-router-dom'
 import TopBarProgress from 'react-topbar-progress-indicator'
+import { AppContainer } from './elements'
 
 TopBarProgress.config({
   barColors: {
@@ -11,25 +12,20 @@ TopBarProgress.config({
   barThickness: 5
 })
 
-function wrapWithFallback (children) {
-  return (
-    <React.Suspense fallback={<TopBarProgress />}>
-      {children}
-    </React.Suspense>
-  )
-}
-
 const Lobby = React.lazy(() => import('views/lobby').catch(console.log))
 const Room = React.lazy(() => import('views/room').catch(console.log))
 
 function App () {
+  window.sessionStorage.clear()
   return (
-    <div>
-      <Routes>
-        <Route path='/' element={wrapWithFallback(<Lobby />)} />
-        <Route path='/new' element={wrapWithFallback(<Room />)} />
-      </Routes>
-    </div>
+    <AppContainer>
+      <React.Suspense fallback={<TopBarProgress />}>
+        <Routes>
+          <Route path='*' element={<Lobby />} />
+          <Route path='/join:id' element={<Room />} />
+        </Routes>
+      </React.Suspense>
+    </AppContainer>
   )
 }
 

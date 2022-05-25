@@ -1,20 +1,17 @@
 import React from 'react'
-import { LobbyContainer, MenuButton, MenuContainer, Title } from './elements'
-import { useNavigate } from 'react-router-dom'
+import { Route, Routes } from 'react-router-dom'
+import { LobbyContainer, Title } from './elements'
+import Menu from './menu'
+import NewRoom from './new-room'
 
 function Lobby () {
-  const navigate = useNavigate()
   return (
     <LobbyContainer>
-      <MenuContainer>
-        <Title>Clouddle</Title>
-        <MenuButton variant='contained' color='secondary' size='large' onClick={() => navigate('/new')}>
-          Create room
-        </MenuButton>
-        <MenuButton variant='contained' color='secondary' size='large' onClick={() => navigate('/join')}>
-          Join room
-        </MenuButton>
-      </MenuContainer>
+      <Title>Clouddle</Title>
+      <Routes>
+        <Route path='/' element={<Menu />} />
+        <Route path='/new' element={<NewRoom />} />
+      </Routes>
     </LobbyContainer>
   )
 }
