@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Title, Divider, MenuButton, MenuButtonContainer, RoomTextField } from './elements'
+import { Divider, MenuButton, MenuButtonContainer, RoomTextField, Title } from './elements'
 import { useNavigate } from 'react-router-dom'
 import { CardContainer } from '../elements'
 

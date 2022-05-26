@@ -1,22 +1,30 @@
 import React, { useState } from 'react'
-import { useLocation, useParams } from 'react-router-dom'
+import { useLocation, useNavigate, useParams } from 'react-router-dom'
+import Confetti from 'react-confetti'
 import wsClient from '../../services/ws-client'
 import {
+  ActiveTurnSection,
+  ActiveTurnTitle,
   CellContainer,
+  DialogBody,
   InputSection,
   MainSection,
   SessionLayout,
-  WordInput,
+  UsedWordsStackTitle,
   UserBadge,
-  UsedWordsStackTitle, ActiveTurnSection, ActiveTurnTitle
+  WordInput
 } from './elements'
 import httpClient from '../../services/http-client'
 import { useMessage } from '../../providers/message-provider'
-import { Badge, Chip, Stack } from '@mui/material'
+import { Badge, Chip, Dialog, DialogActions, Stack } from '@mui/material'
+import { MenuButton } from '../home/elements'
+import { useWindowSize } from 'react-use'
 
 const user = window.sessionStorage.getItem('user')
 
 function Session () {
+  const { width, height } = useWindowSize()
+  const navigate = useNavigate()
   const { state } = useLocation()
   const { id } = useParams()
   const [session, setSession] = useState(state.session)
@@ -25,8 +33,11 @@ function Session () {
   const isTurn = session?.userOrder[session?.currentUser] === user
 
   wsClient.on(id, function (data) {
-    console.log(data)
-    setSession(data)
+    if (data?.winner) {
+      setTimeout(() => setSession(data), 2000)
+    } else {
+      setSession(data)
+    }
   })
 
   return (
@@ -106,6 +117,54 @@ function Session () {
           }}
         />
       </InputSection>
+      <Dialog
+        open={!!session?.winner}
+        onClose={() => navigate('/')}
+        fullWidth
+      >
+        <DialogBody>
+          <Badge
+            key={session?.winner}
+            color='primary'
+            showZero
+            overlap='circular'
+            badgeContent={`${session?.points[user]} points 🥇`}
+            anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+            max={Number.MAX_SAFE_INTEGER}
+          >
+            <UserBadge current>
+              {session?.winner?.slice(0, 4)}
+            </UserBadge>
+          </Badge>
+          <Stack spacing={3} direction='row'>
+            {session?.userOrder.map((user) => (
+              <Badge
+                key={user}
+                color='primary'
+                showZero
+                overlap='circular'
+                badgeContent={`${session?.points[user]} points`}
+                anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+                max={Number.MAX_SAFE_INTEGER}
+              >
+                <UserBadge>
+                  {user.slice(0, 4)}
+                </UserBadge>
+              </Badge>
+            ))}
+          </Stack>
+        </DialogBody>
+        <DialogActions style={{ backgroundColor: 'rebeccapurple' }}>
+          <MenuButton
+            variant='contained'
+            color='secondary'
+            onClick={() => navigate('/')}
+          >
+            Go home
+          </MenuButton>
+        </DialogActions>
+      </Dialog>
+      <Confetti width={width} height={height} run={!!session?.winner} />
     </SessionLayout>
   )
 }

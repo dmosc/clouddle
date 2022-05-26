@@ -15,7 +15,6 @@ const MainSection = styled.div`
   align-items: center;
   width: inherit;
   height: 80%;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   border-radius: 5px;
 `
 
@@ -115,4 +114,25 @@ const UserBadge = styled.div`
   }
 `
 
-export { SessionLayout, MainSection, ActiveTurnSection, ActiveTurnTitle, InputSection, WordInput, CellContainer, UsedWordsStackTitle, UserBadge }
+const DialogBody = styled.div`
+  width: 100%;
+  height: 50vh;
+  display: flex;
+  background-color: rebeccapurple;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+`
+
+export {
+  SessionLayout,
+  MainSection,
+  ActiveTurnSection,
+  ActiveTurnTitle,
+  InputSection,
+  WordInput,
+  CellContainer,
+  UsedWordsStackTitle,
+  UserBadge,
+  DialogBody
+}
