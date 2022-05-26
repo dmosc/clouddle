@@ -5,13 +5,14 @@ import wsClient from '../../services/ws-client'
 import { useMessage } from '../../providers/message-provider'
 import { RoomChip, StartButton, UserBadge, UserBadgeContainer } from './elements'
 import { Badge, Stack } from '@mui/material'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { CardContainer } from '../elements'
 
 function Room () {
   const { id } = useParams()
   const [session, setSession] = useState(undefined)
   const { sendMessage } = useMessage()
+  const navigate = useNavigate()
   const shouldCreateRoom = id === 'new'
 
   useEffectOnce(() => {
@@ -23,7 +24,11 @@ function Room () {
         window.sessionStorage.setItem('user', user)
         setSession(session)
         wsClient.on(session.id, function (data) {
-          setSession(data)
+          if (data?.isActive) {
+            navigate(`/session/${data?.id}`, { state: { session: data } })
+          } else {
+            setSession(data)
+          }
         })
       })
       .catch(console.log)
@@ -56,7 +61,15 @@ function Room () {
           ))}
         </Stack>
       </UserBadgeContainer>
-      <StartButton variant='contained' color='secondary'>
+      <StartButton
+        variant='contained'
+        color='secondary'
+        onClick={() => {
+          httpClient
+            .post('/rooms/start')
+            .catch(console.log)
+        }}
+      >
         Start game
       </StartButton>
     </CardContainer>

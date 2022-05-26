@@ -3,7 +3,7 @@ import { Title, Divider, MenuButton, MenuButtonContainer, RoomTextField } from '
 import { useNavigate } from 'react-router-dom'
 import { CardContainer } from '../elements'
 
-function Lobby () {
+function Home () {
   const [room, setRoom] = useState(undefined)
   const navigate = useNavigate()
 
@@ -37,4 +37,4 @@ function Lobby () {
   )
 }
 
-export default Lobby
+export default Home

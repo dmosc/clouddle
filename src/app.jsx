@@ -12,17 +12,20 @@ TopBarProgress.config({
   barThickness: 5
 })
 
-const Lobby = React.lazy(() => import('views/lobby').catch(console.log))
+const Home = React.lazy(() => import('views/home').catch(console.log))
 const Room = React.lazy(() => import('views/room').catch(console.log))
+const Session = React.lazy(() => import('views/session').catch(console.log))
+
+window.sessionStorage.clear()
 
 function App () {
-  window.sessionStorage.clear()
   return (
     <AppContainer>
       <React.Suspense fallback={<TopBarProgress />}>
         <Routes>
-          <Route path='*' element={<Lobby />} />
+          <Route path='*' element={<Home />} />
           <Route path='room/:id' element={<Room />} />
+          <Route path='session/:id' element={<Session />} />
         </Routes>
       </React.Suspense>
     </AppContainer>
