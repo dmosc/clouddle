@@ -61,6 +61,7 @@ function Session () {
         .post('/rooms/turn', { word: word ?? '_' })
         .catch(console.log)
       setWord(undefined)
+      setIsTimeRunning(false)
     }
   }, [isTimeRunning, timeLeft, timeLeftActions, word])
 
