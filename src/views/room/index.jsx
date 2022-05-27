@@ -64,6 +64,7 @@ function Room () {
       <StartButton
         variant='contained'
         color='secondary'
+        disabled={session?.userOrder.length < 2}
         onClick={() => {
           httpClient
             .post('/rooms/start')

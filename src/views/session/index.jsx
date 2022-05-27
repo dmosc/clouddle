@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useLocation, useNavigate, useParams } from 'react-router-dom'
 import Confetti from 'react-confetti'
 import wsClient from '../../services/ws-client'
@@ -19,6 +19,7 @@ import { useMessage } from '../../providers/message-provider'
 import { Badge, Chip, Dialog, DialogActions, Stack } from '@mui/material'
 import { MenuButton } from '../home/elements'
 import { useWindowSize } from 'react-use'
+import useCountDown from 'react-countdown-hook'
 
 const user = window.sessionStorage.getItem('user')
 
@@ -30,15 +31,37 @@ function Session () {
   const [session, setSession] = useState(state.session)
   const { sendMessage } = useMessage()
   const [word, setWord] = useState(undefined)
+  const [timeLeft, timeLeftActions] = useCountDown(session?.defaultTurnDuration, 1000)
+  const [isTimeRunning, setIsTimeRunning] = useState(false)
   const isTurn = session?.userOrder[session?.currentUser] === user
 
   wsClient.on(id, function (data) {
     if (data?.winner) {
+      timeLeftActions.pause()
       setTimeout(() => setSession(data), 2000)
     } else {
       setSession(data)
     }
   })
+
+  useEffect(() => {
+    if (isTurn) {
+      timeLeftActions.start()
+      setIsTimeRunning(true)
+    } else {
+      timeLeftActions.pause()
+      setIsTimeRunning(false)
+    }
+  }, [isTurn, timeLeftActions])
+
+  useEffect(() => {
+    if (isTimeRunning && !timeLeft) {
+      httpClient
+        .post('/rooms/turn', { word: word ?? '' })
+        .catch(console.log)
+      setWord(undefined)
+    }
+  }, [isTimeRunning, timeLeft, timeLeftActions, word])
 
   return (
     <SessionLayout>
@@ -69,6 +92,9 @@ function Session () {
               {session?.userOrder[session?.currentUser].slice(0, 4)}
             </UserBadge>
           </Badge>
+          <ActiveTurnTitle>
+            {isTurn && `${timeLeft / 1000}s`}
+          </ActiveTurnTitle>
         </ActiveTurnSection>
         <Stack spacing={2}>
           {session?.userOrder.map((user) => (
@@ -158,7 +184,10 @@ function Session () {
           <MenuButton
             variant='contained'
             color='secondary'
-            onClick={() => navigate('/')}
+            onClick={() => {
+              window.sessionStorage.clear()
+              navigate('/')
+            }}
           >
             Go home
           </MenuButton>

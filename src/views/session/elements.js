@@ -31,7 +31,7 @@ const ActiveTurnTitle = styled.div`
   font-weight: bold;
   font-size: xxx-large;
   width: 130%;
-  color: #ffffff;
+  color: ${props => props.color ? props.color : '#ffffff'};
   background-color: transparent;
   text-align: center;
 `
