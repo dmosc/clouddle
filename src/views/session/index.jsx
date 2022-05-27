@@ -155,7 +155,7 @@ function Session () {
             color='primary'
             showZero
             overlap='circular'
-            badgeContent={`${session?.points[user]} points 🥇`}
+            badgeContent={`${session?.points[session?.winner]} points 🥇`}
             anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
             max={Number.MAX_SAFE_INTEGER}
           >
