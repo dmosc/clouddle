@@ -46,6 +46,7 @@ function Session () {
 
   useEffect(() => {
     if (isTurn) {
+      timeLeftActions.reset()
       timeLeftActions.start()
       setIsTimeRunning(true)
     } else {
@@ -57,7 +58,7 @@ function Session () {
   useEffect(() => {
     if (isTimeRunning && !timeLeft) {
       httpClient
-        .post('/rooms/turn', { word: word ?? '' })
+        .post('/rooms/turn', { word: word ?? '_' })
         .catch(console.log)
       setWord(undefined)
     }
