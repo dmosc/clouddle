@@ -69,7 +69,7 @@ function Session () {
     <SessionLayout>
       <MainSection>
         <div />
-        <Stack spacing={2} style={{ overflowY: 'scroll', maxHeight: '70%' }}>
+        <Stack spacing={2} style={{ overflowY: 'scroll', maxHeight: '75%' }}>
           <UsedWordsStackTitle>
             Used words ({session?.usedWords.length})
           </UsedWordsStackTitle>
