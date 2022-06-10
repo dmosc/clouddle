@@ -19,9 +19,8 @@ function Room () {
     httpClient
       .get(shouldCreateRoom ? '/rooms/new' : `/rooms/join/${id}`)
       .then(function ({ data }) {
-        const { session, user } = data
+        const { session } = data
         window.sessionStorage.setItem('session', session.id)
-        window.sessionStorage.setItem('user', user)
         setSession(session)
         wsClient.on(session.id, function (data) {
           if (data?.isActive) {
@@ -55,7 +54,7 @@ function Room () {
               anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
             >
               <UserBadge>
-                {user.slice(0, 4)}
+                {user}
               </UserBadge>
             </Badge>
           ))}

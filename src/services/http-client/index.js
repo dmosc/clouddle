@@ -3,16 +3,15 @@ import { backendConfig } from '../../environment'
 
 const httpClient = axios.create({
   baseURL: backendConfig.httpUrl,
-  timeout: 1000
+  timeout: 1000,
+  withCredentials: true
 })
 
 httpClient.interceptors.request.use(function (config) {
   const session = window.sessionStorage.getItem('session')
-  const user = window.sessionStorage.getItem('user')
-  if (session && user) {
+  if (session) {
     config.headers = {
       ...config.headers,
-      user,
       session
     }
   }

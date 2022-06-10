@@ -2,6 +2,7 @@ import React from 'react'
 import { Route, Routes } from 'react-router-dom'
 import TopBarProgress from 'react-topbar-progress-indicator'
 import { AppContainer } from './elements'
+import { useUser } from './providers/user-provider'
 
 TopBarProgress.config({
   barColors: {
@@ -15,10 +16,21 @@ TopBarProgress.config({
 const Home = React.lazy(() => import('views/home').catch(console.log))
 const Room = React.lazy(() => import('views/room').catch(console.log))
 const Session = React.lazy(() => import('views/session').catch(console.log))
+const Auth = React.lazy(() => import('views/auth').catch(console.log))
 
 window.sessionStorage.clear()
 
 function App () {
+  const { isLogged } = useUser()
+
+  if (!isLogged) {
+    return (
+      <AppContainer>
+        <Auth />
+      </AppContainer>
+    )
+  }
+
   return (
     <AppContainer>
       <React.Suspense fallback={<TopBarProgress />}>

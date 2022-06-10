@@ -20,10 +20,10 @@ import { Badge, Chip, Dialog, DialogActions, Stack } from '@mui/material'
 import { MenuButton } from '../home/elements'
 import { useWindowSize } from 'react-use'
 import useCountDown from 'react-countdown-hook'
-
-const user = window.sessionStorage.getItem('user')
+import { useUser } from '../../providers/user-provider'
 
 function Session () {
+  const { userPayload } = useUser()
   const { width, height } = useWindowSize()
   const navigate = useNavigate()
   const { state } = useLocation()
@@ -33,7 +33,7 @@ function Session () {
   const [word, setWord] = useState(undefined)
   const [timeLeft, timeLeftActions] = useCountDown(session?.defaultTurnDuration, 1000)
   const [isTimeRunning, setIsTimeRunning] = useState(false)
-  const isTurn = session?.userOrder[session?.currentUser] === user
+  const isTurn = session?.userOrder[session?.currentUser] === userPayload?.username
 
   wsClient.on(id, function (data) {
     if (data?.winner) {
@@ -110,7 +110,7 @@ function Session () {
               max={Number.MAX_SAFE_INTEGER}
             >
               <UserBadge>
-                {user.slice(0, 4)}
+                {user}
               </UserBadge>
             </Badge>
           ))}
@@ -176,7 +176,7 @@ function Session () {
                 max={Number.MAX_SAFE_INTEGER}
               >
                 <UserBadge>
-                  {user.slice(0, 4)}
+                  {user}
                 </UserBadge>
               </Badge>
             ))}
