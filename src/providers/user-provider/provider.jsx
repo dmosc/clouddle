@@ -9,8 +9,14 @@ function UserProvider ({ children }) {
   const [isLogged, setIsLogged] = useState(false)
   const [userPayload, setUserPayload] = useState({})
 
-  function maybeGetUser () {
-    const token = Cookies.get('cld-token')
+  function maybeGetUser (tokenFromRequest = null) {
+    const cookie = Cookies.get('cld-token')
+    const token = cookie ?? tokenFromRequest?.data.token
+
+    if (!cookie && token) {
+      Cookies.set('cld-token', token)
+    }
+
     if (token) {
       const payload = jwtDecode(token)
       setIsLogged(!!token)
@@ -22,6 +28,7 @@ function UserProvider ({ children }) {
     httpClient
       .post('/auth/logout')
       .catch(console.log)
+    Cookies.remove('cld-token')
     setIsLogged(false)
     setUserPayload({})
   }
