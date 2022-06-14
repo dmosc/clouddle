@@ -15,6 +15,7 @@ const Title = styled.h2`
   font-size: 8vw;
   text-align: center;
   margin-top: 10px;
+  margin-bottom: 0;
   color: var(--color-primary);
   animation: shadows 1.2s ease-in infinite, move 1.2s ease-in infinite;
   letter-spacing: -0.5rem;
