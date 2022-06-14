@@ -121,4 +121,11 @@ const Divider = styled.div`
   margin: 10px 0;
 `
 
-export { Title, MenuButton, MenuButtonContainer, RoomTextField, Divider }
+const ActionButtonsContainer = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  margin-top: 30px;
+`
+
+export { Title, MenuButton, MenuButtonContainer, RoomTextField, Divider, ActionButtonsContainer }

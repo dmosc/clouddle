@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Divider, MenuButton, MenuButtonContainer, RoomTextField, Title } from './elements'
+import { ActionButtonsContainer, Divider, MenuButton, MenuButtonContainer, RoomTextField, Title } from './elements'
 import { useNavigate } from 'react-router-dom'
 import { CardContainer } from '../elements'
 import { Button } from '@mui/material'
@@ -35,14 +35,22 @@ function Home () {
         >
           Create room
         </MenuButton>
-        <Button
-          variant='contained'
-          color='secondary'
-          onClick={logout}
-          style={{ marginTop: '30px' }}
-        >
-          Logout
-        </Button>
+        <ActionButtonsContainer>
+          <Button
+            variant='contained'
+            color='secondary'
+            onClick={logout}
+          >
+            Logout
+          </Button>
+          <Button
+            variant='contained'
+            color='secondary'
+            onClick={() => navigate('/sessions')}
+          >
+            Past games
+          </Button>
+        </ActionButtonsContainer>
       </MenuButtonContainer>
     </CardContainer>
   )

@@ -16,6 +16,7 @@ TopBarProgress.config({
 const Home = React.lazy(() => import('views/home').catch(console.log))
 const Room = React.lazy(() => import('views/room').catch(console.log))
 const Session = React.lazy(() => import('views/session').catch(console.log))
+const Sessions = React.lazy(() => import('views/sessions').catch(console.log))
 const Auth = React.lazy(() => import('views/auth').catch(console.log))
 
 window.sessionStorage.clear()
@@ -38,6 +39,7 @@ function App () {
           <Route path='*' element={<Home />} />
           <Route path='room/:id' element={<Room />} />
           <Route path='session/:id' element={<Session />} />
+          <Route path='sessions' element={<Sessions />} />
         </Routes>
       </React.Suspense>
     </AppContainer>

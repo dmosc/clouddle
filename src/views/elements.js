@@ -5,7 +5,7 @@ const CardContainer = styled.div`
   height: 70%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
   background: blueviolet;
   border-radius: 2%;
