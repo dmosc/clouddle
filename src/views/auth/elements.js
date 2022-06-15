@@ -1,6 +1,8 @@
 import styled from '@emotion/styled'
 import { Button } from '@mui/material'
 
+//Game name styling and animation
+
 const Title = styled.h2`
   --color-primary: #fce205;
   --color-secondary: #ffc30b;
@@ -77,13 +79,14 @@ const Title = styled.h2`
     }
   }
 `
-
+//Styling Login and Register buttons
 const MenuButton = styled(Button)`
   width: 100%;
   font-size: xx-large;
   font-weight: bolder;
 `
 
+//Sizing inputs and buttons container 
 const MenuButtonContainer = styled.div`
   width: 85%;
   display: flex;
@@ -91,7 +94,7 @@ const MenuButtonContainer = styled.div`
   justify-content: center;
   align-items: center;
 `
-
+//Sizing and styling username and password inputs
 const TextField = styled.input`
   font-weight: bolder;
   font-size: x-large;
@@ -113,7 +116,7 @@ const TextField = styled.input`
     outline: none;
   }
 `
-
+//Styling line to separate login and register buttons
 const Divider = styled.div`
   width: 30%;
   background-color: rebeccapurple;

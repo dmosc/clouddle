@@ -24,6 +24,7 @@ window.sessionStorage.clear()
 function App () {
   const { isLogged } = useUser()
 
+  //Checks if user has already logged in
   if (!isLogged) {
     return (
       <AppContainer>
@@ -31,7 +32,8 @@ function App () {
       </AppContainer>
     )
   }
-
+//if user has already logged in, the app enters the Single Page Application part
+//The app displays the component which matches its path
   return (
     <AppContainer>
       <React.Suspense fallback={<TopBarProgress />}>

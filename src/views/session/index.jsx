@@ -44,6 +44,7 @@ function Session () {
     }
   })
 
+  //Hook called each time isTurn or timeLeftActions changes
   useEffect(() => {
     if (isTurn) {
       timeLeftActions.reset()
@@ -55,6 +56,7 @@ function Session () {
     }
   }, [isTurn, timeLeftActions])
 
+  //Hook called each time isTimeRunning, timeLeft, timeLeftActions, word changes
   useEffect(() => {
     if (isTimeRunning && !timeLeft) {
       httpClient

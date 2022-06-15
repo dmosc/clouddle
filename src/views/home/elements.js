@@ -1,6 +1,7 @@
 import styled from '@emotion/styled'
 import { Button } from '@mui/material'
 
+//Game name styling and animation
 const Title = styled.h2`
   --color-primary: #fce205;
   --color-secondary: #ffc30b;
@@ -78,13 +79,13 @@ const Title = styled.h2`
     }
   }
 `
-
+//Styling join and create room buttons
 const MenuButton = styled(Button)`
   width: 100%;
   font-size: xx-large;
   font-weight: bolder;
 `
-
+//Sizing Home elements container
 const MenuButtonContainer = styled.div`
   width: 85%;
   display: flex;
@@ -92,7 +93,7 @@ const MenuButtonContainer = styled.div`
   justify-content: center;
   align-items: center;
 `
-
+//Styling and sizing room-id input
 const RoomTextField = styled.input`
   font-weight: bolder;
   font-size: x-large;
@@ -114,7 +115,7 @@ const RoomTextField = styled.input`
     outline: none;
   }
 `
-
+//Styling and sizing line to separate join and create room buttons
 const Divider = styled.div`
   width: 30%;
   background-color: rebeccapurple;
@@ -122,6 +123,7 @@ const Divider = styled.div`
   margin: 10px 0;
 `
 
+//Styling, sizing and positioning logout and past games buttons
 const ActionButtonsContainer = styled.div`
   width: 100%;
   display: flex;

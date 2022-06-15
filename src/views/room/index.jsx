@@ -9,11 +9,13 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { CardContainer } from '../elements'
 
 function Room () {
+  //Declare states and variables
   const { id } = useParams()
   const [session, setSession] = useState(undefined)
   const { sendMessage } = useMessage()
   const navigate = useNavigate()
   const shouldCreateRoom = id === 'new'
+
 
   useEffectOnce(() => {
     httpClient
@@ -34,7 +36,9 @@ function Room () {
   })
 
   return (
+    //Room elements container
     <CardContainer>
+      {/* Contains room chip, calls function to copy content to clipboard and returns a promise to send a message */}
       <RoomChip
         onClick={() => {
           navigator.clipboard.writeText(session?.id).then(() => sendMessage('Copied to clipboard'))
@@ -42,6 +46,7 @@ function Room () {
       >
         <p>{session?.id}</p>
       </RoomChip>
+
       <UserBadgeContainer>
         <Stack spacing={3} direction='row'>
           {session?.userOrder.map((user, i) => (
@@ -60,6 +65,8 @@ function Room () {
           ))}
         </Stack>
       </UserBadgeContainer>
+      {/* Start button, disabled until at least 2 people join */}
+      {/* Calls onClick function to launch game */}
       <StartButton
         variant='contained'
         color='secondary'

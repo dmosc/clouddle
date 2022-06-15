@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 
+//Declare/create useEffectOnce hook
 const useEffectOnce = (effect) => {
   const destroyFunc = useRef()
   const effectCalled = useRef(false)
